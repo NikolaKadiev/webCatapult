@@ -5,8 +5,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="FindWebsiteButton">Next Website</string>
+    <string name="OpenWebsiteButton">Open in browser</string>
     <string name="ratingText">Website Rating</string>
     <string name="addressText">Website Address</string>
-    
+    <string name="EnterCountryCodeMessage">Enter country ISO code to limit resuts to that country.Example  -  "US","ES".</string>
+    <string name="countryCodeHint">Enter country code here</string>
+    <string name="confirmCountryCode">Done</string>
+    <string name="websiteDescription">Site Description</string>
 
 </resources>

@@ -8,33 +8,50 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.webcatapult.MainActivity" >
 
-    <TextView
-        android:id="@+id/rating"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/address"
-        android:layout_alignLeft="@+id/address"
-        android:layout_marginBottom="30dp"
-        android:text="@string/ratingText" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="46dp"
-        android:text="@string/addressText" />
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ratingText" />
 
-    <Button
-        android:id="@+id/button1"
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/addressText" />
+
+        <TextView
+            android:id="@+id/websiteDescription"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:text="@string/websiteDescription" />
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="49dp"
-        android:text="@string/FindWebsiteButton"
-        android:onClick="nextWebsite" />
+        android:gravity="bottom" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="nextWebsite"
+            android:text="@string/FindWebsiteButton" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openWebSite"
+            android:text="@string/OpenWebsiteButton"
+            android:layout_below="@id/button1" />
+    </RelativeLayout>
 
 </RelativeLayout>
