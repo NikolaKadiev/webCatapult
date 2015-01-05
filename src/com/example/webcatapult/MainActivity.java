@@ -92,6 +92,7 @@ public class MainActivity extends Activity implements AsyncResponse
 	    new NetworkTask(this).execute(url);
 
 	}
+	
 	Button nextWebsiteButton = (Button) findViewById(R.id.button1);
 	TextView ratingTextView = (TextView) findViewById(R.id.rating);
 	TextView addressTextView = (TextView) findViewById(R.id.address);
