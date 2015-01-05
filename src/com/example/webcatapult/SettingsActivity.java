@@ -16,6 +16,7 @@ public class SettingsActivity extends Activity
 	setContentView(R.layout.setings_activity);
     }
 
+    
     public void sendCountryCode(View view)
     {
 	Intent resultIntent = new Intent();
