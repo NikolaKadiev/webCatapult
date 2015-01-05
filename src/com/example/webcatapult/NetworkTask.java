@@ -29,12 +29,8 @@ public class NetworkTask extends AsyncTask<String, Void, String>
 
     public NetworkTask(AsyncResponse asyncRes)
     {
-	Log.i("NetworkTask", "constructor callled");
 	this.delegate = asyncRes;
-	if (delegate != null)
-	{
-	    Log.i("NetworkTask", "initialazed " + delegate.hashCode());
-	}
+
     }
 
     @Override
@@ -73,10 +69,10 @@ public class NetworkTask extends AsyncTask<String, Void, String>
     @Override
     protected void onPostExecute(String result)
     {
-	if (result != null )
+	if (result != null)
 	{
 	    delegate.processFinish(result);
-	    
+
 	} else
 	{
 	    delegate.processFinish("Description not found");
