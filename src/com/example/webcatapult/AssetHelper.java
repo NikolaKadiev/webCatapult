@@ -12,6 +12,7 @@ public class AssetHelper extends SQLiteAssetHelper
     static final String colRating = "RATING";
     static final String colAddress = "ADDRESS";
     static final String colCountryCode = "COUNTRYCODE";
+    
 
     public AssetHelper(Context context, String name, CursorFactory factory,
 	    int version)
