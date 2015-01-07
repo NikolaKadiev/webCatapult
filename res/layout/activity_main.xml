@@ -13,25 +13,63 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/rating"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ratingText" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/addressText" />
+            <TextView
+                android:id="@+id/ratingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ratingText"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/websiteDescription"
-            android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:text="@string/websiteDescription" />
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_toRightOf="@id/ratingLabel" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/addressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addressText"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/addressLabel" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/websiteDescriptionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/websiteDescription"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/websiteDescription"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/websiteDescriptionLabel" />
+        </RelativeLayout>
     </LinearLayout>
-    
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -40,19 +78,20 @@
         android:gravity="bottom" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/findWebsiteButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="nextWebsite"
             android:text="@string/FindWebsiteButton" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/openInBrowserButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/findWebsiteButton"
+            android:enabled="false"
             android:onClick="openWebSite"
-            android:text="@string/OpenWebsiteButton"
-            android:layout_below="@id/button1" />
+            android:text="@string/OpenWebsiteButton" />
     </RelativeLayout>
 
 </RelativeLayout>
