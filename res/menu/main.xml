@@ -3,10 +3,16 @@
     tools:context="com.example.webcatapult.MainActivity" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_selectCountryCode"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:title="@string/action_country_code"/>
+    
+    <item
+        android:id="@+id/action_selectRatingLimit"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_rating_limit"/>
     
    
 </menu>
