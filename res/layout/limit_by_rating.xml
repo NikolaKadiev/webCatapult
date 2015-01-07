@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/limitByRatingTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/selectRatingLimit" />
+
+    <RadioGroup
+        android:id="@+id/limitRatingsradioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/limit1000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/one_thousand" />
+
+        <RadioButton
+            android:id="@+id/limit10000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ten_thousand" />
+
+        <RadioButton
+            android:id="@+id/limit100000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hundred_thousand" />
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom" >
+
+        <Button
+            android:id="@+id/limitRatingsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="sendRatingsLimit"
+            android:text="@string/limitRatingsButtonText" />
+    </RelativeLayout>
+
+</LinearLayout>
