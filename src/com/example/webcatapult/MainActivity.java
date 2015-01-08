@@ -28,7 +28,7 @@ public class MainActivity extends Activity implements AsyncResponse
     private static final int MAX_DESCRIPTION_LENGTH = 200;
     private String countryCode = null;
     private int ratingsLimit = 1000000;
-    private boolean openInBrowserEnabled= false;
+    private boolean openInBrowserEnabled = false;
     SQLiteDatabase db;
     Document htmlDoc;
 
@@ -52,10 +52,11 @@ public class MainActivity extends Activity implements AsyncResponse
 		    .getString("description"));
 	    this.countryCode = savedInstanceState.getString("countryCode");
 	    this.ratingsLimit = savedInstanceState.getInt("ratingsLimit");
-	    this.openInBrowserEnabled = savedInstanceState.getBoolean("openInBrowserEnabled");
+	    this.openInBrowserEnabled = savedInstanceState
+		    .getBoolean("openInBrowserEnabled");
 	    Button openInBrowser = (Button) findViewById(R.id.openInBrowserButton);
 	    openInBrowser.setEnabled(openInBrowserEnabled);
-	    
+
 	}
 
     }
@@ -119,11 +120,7 @@ public class MainActivity extends Activity implements AsyncResponse
 	int selectedLimit = 0;
 	if (resultCode == Activity.RESULT_OK && requestCode == 0)
 	{
-
-	    if (selectedLimit == 0)
-	    {
-		countryCode = data.getDataString();
-	    }
+	    countryCode = data.getDataString();
 	}
 
 	if (resultCode == Activity.RESULT_OK && requestCode == 1)
