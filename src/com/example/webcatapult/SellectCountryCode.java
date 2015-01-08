@@ -22,7 +22,7 @@ public class SellectCountryCode extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.setings_activity);
+	setContentView(R.layout.sellect_country_code_activity);
 	for (String isoCode : Locale.getISOCountries())
 	{
 	    isoCountries.add(isoCode.toLowerCase(Locale.getDefault()));
