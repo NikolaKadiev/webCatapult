@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -10,14 +11,13 @@
         android:layout_height="wrap_content"
         android:text="@string/EnterCountryCodeMessage" />
 
-    
     <EditText
         android:id="@+id/countryCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ems="10"
         android:hint="@string/countryCodeHint"
-        android:paddingTop="20dp"
-        android:ems="10" >
+        android:paddingTop="20dp" >
     </EditText>
 
     <RelativeLayout
@@ -29,8 +29,8 @@
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/confirmCountryCode"
-            android:onClick="sendCountryCode" />
+            android:onClick="sendCountryCode"
+            android:text="@string/confirmCountryCode" />
     </RelativeLayout>
 
 </LinearLayout>
