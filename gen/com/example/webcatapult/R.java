@@ -25,34 +25,53 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080007;
-        public static final int address=0x7f080001;
-        public static final int button1=0x7f080003;
-        public static final int button2=0x7f080004;
-        public static final int countryCode=0x7f080006;
-        public static final int rating=0x7f080000;
-        public static final int textView1=0x7f080005;
-        public static final int websiteDescription=0x7f080002;
+        public static final int action_selectCountryCode=0x7f080012;
+        public static final int action_selectRatingLimit=0x7f080013;
+        public static final int address=0x7f080003;
+        public static final int addressLabel=0x7f080002;
+        public static final int button1=0x7f080011;
+        public static final int countryCode=0x7f080010;
+        public static final int findWebsiteButton=0x7f080006;
+        public static final int limit1000=0x7f08000a;
+        public static final int limit10000=0x7f08000b;
+        public static final int limit100000=0x7f08000c;
+        public static final int limitByRatingTextView=0x7f080008;
+        public static final int limitRatingsButton=0x7f08000d;
+        public static final int limitRatingsradioGroup=0x7f080009;
+        public static final int linearLayout=0x7f08000e;
+        public static final int openInBrowserButton=0x7f080007;
+        public static final int rating=0x7f080001;
+        public static final int ratingLabel=0x7f080000;
+        public static final int textView1=0x7f08000f;
+        public static final int websiteDescription=0x7f080005;
+        public static final int websiteDescriptionLabel=0x7f080004;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int setings_activity=0x7f030001;
+        public static final int limit_by_rating=0x7f030001;
+        public static final int setings_activity=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f070000;
     }
     public static final class string {
-        public static final int EnterCountryCodeMessage=0x7f050007;
-        public static final int FindWebsiteButton=0x7f050003;
-        public static final int OpenWebsiteButton=0x7f050004;
-        public static final int action_settings=0x7f050002;
-        public static final int addressText=0x7f050006;
+        public static final int EnterCountryCodeMessage=0x7f050008;
+        public static final int FindWebsiteButton=0x7f050004;
+        public static final int OpenWebsiteButton=0x7f050005;
+        public static final int action_country_code=0x7f050002;
+        public static final int action_rating_limit=0x7f050003;
+        public static final int addressText=0x7f050007;
         public static final int app_name=0x7f050000;
-        public static final int confirmCountryCode=0x7f050009;
-        public static final int countryCodeHint=0x7f050008;
+        public static final int confirmCountryCode=0x7f05000a;
+        public static final int countryCodeHint=0x7f050009;
         public static final int hello_world=0x7f050001;
-        public static final int ratingText=0x7f050005;
-        public static final int websiteDescription=0x7f05000a;
+        public static final int hundred_thousand=0x7f05000f;
+        public static final int limitRatingsButtonText=0x7f050010;
+        public static final int one_thousand=0x7f05000d;
+        public static final int ratingText=0x7f050006;
+        public static final int selectRatingLimit=0x7f05000c;
+        public static final int ten_thousand=0x7f05000e;
+        public static final int websiteDescription=0x7f05000b;
     }
     public static final class style {
         /** 
