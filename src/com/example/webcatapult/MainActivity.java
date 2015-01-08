@@ -6,6 +6,7 @@ import java.util.Random;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,15 +19,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements AsyncResponse
 {
 
     private static final String DB_FILE_NAME = "database";
     private static final int MAX_DESCRIPTION_LENGTH = 200;
-    private static final int DATABASE_ROWS = 1000000;
-
     private String countryCode = null;
+    private int ratingsLimit = 1000000;
+    private boolean openInBrowserEnabled= false;
     SQLiteDatabase db;
     Document htmlDoc;
 
@@ -38,6 +40,48 @@ public class MainActivity extends Activity implements AsyncResponse
 	AssetHelper assetHelper = new AssetHelper(this, DB_FILE_NAME, null, 2);
 	db = assetHelper.getWritableDatabase();
 
+	if (savedInstanceState != null)
+	{
+	    TextView ratingTextView, addressTextView, descriptionTextView;
+	    ratingTextView = (TextView) findViewById(R.id.rating);
+	    addressTextView = (TextView) findViewById(R.id.address);
+	    descriptionTextView = (TextView) findViewById(R.id.websiteDescription);
+	    ratingTextView.setText(savedInstanceState.getString("rating"));
+	    addressTextView.setText(savedInstanceState.getString("address"));
+	    descriptionTextView.setText(savedInstanceState
+		    .getString("description"));
+	    this.countryCode = savedInstanceState.getString("countryCode");
+	    this.ratingsLimit = savedInstanceState.getInt("ratingsLimit");
+	    this.openInBrowserEnabled = savedInstanceState.getBoolean("openInBrowserEnabled");
+	    Button openInBrowser = (Button) findViewById(R.id.openInBrowserButton);
+	    openInBrowser.setEnabled(openInBrowserEnabled);
+	    
+	}
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+	TextView ratingTextView, addressTextView, descriptionTextView;
+	ratingTextView = (TextView) findViewById(R.id.rating);
+	addressTextView = (TextView) findViewById(R.id.address);
+	descriptionTextView = (TextView) findViewById(R.id.websiteDescription);
+
+	String rating = ratingTextView.getText().toString();
+	String address = addressTextView.getText().toString();
+	String description = descriptionTextView.getText().toString();
+
+	String countryCode = this.countryCode;
+	int ratingsLimit = this.ratingsLimit;
+
+	outState.putString("rating", rating);
+	outState.putString("address", address);
+	outState.putString("description", description);
+	outState.putString("countryCode", countryCode);
+	outState.putInt("ratingsLimit", ratingsLimit);
+	outState.putBoolean("openInBrowserEnabled", openInBrowserEnabled);
+	super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -55,21 +99,45 @@ public class MainActivity extends Activity implements AsyncResponse
 	// automatically handle clicks on the Home/Up button, so long
 	// as you specify a parent activity in AndroidManifest.xml.
 	int id = item.getItemId();
-	if (id == R.id.action_settings)
+	if (id == R.id.action_selectCountryCode)
 	{
-	    Intent intent = new Intent(this, SettingsActivity.class);
-	    startActivityForResult(intent, 0);
+	    Intent countryCodeIntent = new Intent(this,
+		    SellectCountryCode.class);
+	    startActivityForResult(countryCodeIntent, 0);
+	}
+	if (id == R.id.action_selectRatingLimit)
+	{
+	    Intent limitByRatingIntent = new Intent(this,
+		    LimitByRatingActivity.class);
+	    startActivityForResult(limitByRatingIntent, 1);
 	}
 	return super.onOptionsItemSelected(item);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+	int selectedLimit = 0;
 	if (resultCode == Activity.RESULT_OK && requestCode == 0)
 	{
-	    countryCode = data.getDataString();
 
+	    if (selectedLimit == 0)
+	    {
+		countryCode = data.getDataString();
+	    }
 	}
+
+	if (resultCode == Activity.RESULT_OK && requestCode == 1)
+	{
+	    try
+	    {
+		selectedLimit = Integer.parseInt(data.getDataString());
+		ratingsLimit = selectedLimit;
+	    } catch (NumberFormatException e)
+	    {
+		Log.i("WEbCatapult", "NumberFormatException");
+	    }
+	}
+
     }
 
     public void nextWebsite(View view)
@@ -87,13 +155,21 @@ public class MainActivity extends Activity implements AsyncResponse
 	} else
 	{
 	    alexaRatingsEntry = getRandomRatingsEntryByCountry();
-	    url = "http://www." + alexaRatingsEntry.getValue();
+	    if (alexaRatingsEntry != null)
+	    {
+		url = "http://www." + alexaRatingsEntry.getValue();
 
-	    new NetworkTask(this).execute(url);
+		new NetworkTask(this).execute(url);
+	    }
 
+	    else
+	    {
+		return;
+	    }
 	}
-	
-	Button nextWebsiteButton = (Button) findViewById(R.id.button1);
+
+	Button nextWebsiteButton = (Button) findViewById(R.id.findWebsiteButton);
+	Button openInBrowserButton = (Button) findViewById(R.id.openInBrowserButton);
 	TextView ratingTextView = (TextView) findViewById(R.id.rating);
 	TextView addressTextView = (TextView) findViewById(R.id.address);
 	TextView descTextView = (TextView) findViewById(R.id.websiteDescription);
@@ -102,6 +178,8 @@ public class MainActivity extends Activity implements AsyncResponse
 	addressTextView.setText(alexaRatingsEntry.getValue());
 	descTextView.setText(" ");
 	nextWebsiteButton.setEnabled(false);
+	openInBrowserButton.setEnabled(true);
+	openInBrowserEnabled = true;
 
     }
 
@@ -118,7 +196,7 @@ public class MainActivity extends Activity implements AsyncResponse
     {
 	Random rand = new Random();
 	String sql = "SELECT * FROM " + AssetHelper.ratingsTable + " WHERE "
-		+ AssetHelper.colRating + " = " + rand.nextInt(DATABASE_ROWS);
+		+ AssetHelper.colRating + " = " + rand.nextInt(ratingsLimit);
 	Log.i("webCatapult", sql);
 	Cursor c = db.rawQuery(sql, null);
 
@@ -140,16 +218,18 @@ public class MainActivity extends Activity implements AsyncResponse
 	Random rand = new Random();
 
 	String sql = "SELECT * FROM " + AssetHelper.ratingsTable + " WHERE "
-		+ AssetHelper.colCountryCode + " = " + "'" + countryCode + "'";
+		+ AssetHelper.colCountryCode + " = " + "'" + countryCode + "'"
+		+ "AND " + AssetHelper.colRating + " < " + ratingsLimit;
 	Log.i("WebCatapult", sql);
 	Cursor c = db.rawQuery(sql, null);
 
-	if (c != null)
+	if (c != null && c.getCount() > 0)
 	{
 	    Log.i("WebCatapult", "" + c.getCount());
 	    int rowNumber = rand.nextInt(c.getCount());
+	    Log.i("RandorRowNumber", "" + rowNumber);
 
-	    for (int i = 0; i < rowNumber; i++)
+	    for (int i = 0; i <= rowNumber; i++)
 	    {
 		c.moveToNext();
 	    }
@@ -227,7 +307,7 @@ public class MainActivity extends Activity implements AsyncResponse
 	    description = limitDescriptionLength(description);
 	    descriptionTextView.setText(description);
 	}
-	Button nextWebsiteButton = (Button) findViewById(R.id.button1);
+	Button nextWebsiteButton = (Button) findViewById(R.id.findWebsiteButton);
 	nextWebsiteButton.setEnabled(true);
     }
 
