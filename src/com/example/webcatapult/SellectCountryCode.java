@@ -10,9 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class SettingsActivity extends Activity
+public class SellectCountryCode extends Activity
 {
     Set<String> isoCountries = new HashSet<>();
     private static final String invalidIsoCodeMsg = "The value you entered is not a valid country ISO code!";
@@ -33,15 +34,16 @@ public class SettingsActivity extends Activity
 
 	EditText countryCodeEditText = (EditText) findViewById(R.id.countryCode);
 	String countryCode = countryCodeEditText.getText().toString();
-	 // check if the countryCode entered is lowerCase because the database entries
-	 // for the countryCode column are all lowerCase.If we don't convert the
-	 // SELECT statements would return 0 rows.
+	// make sure the entered countryCode is lowerCase because the database
+	// entries
+	// for the countryCode column are all lowerCase.If we don't convert the
+	// SELECT statements would return 0 rows.
 	countryCode = countryCode.toLowerCase(Locale.getDefault());
 	if (isoCountries.contains(countryCode))
 	{
-	    Intent resultIntent = new Intent();
-	    resultIntent.setData(Uri.parse(countryCode));
-	    setResult(RESULT_OK, resultIntent);
+	    Intent countryCodeResultIntent = new Intent();
+	    countryCodeResultIntent.setData(Uri.parse(countryCode));
+	    setResult(RESULT_OK, countryCodeResultIntent);
 	    finish();
 	} else
 	{
@@ -49,4 +51,5 @@ public class SettingsActivity extends Activity
 	}
     }
 
+   
 }
