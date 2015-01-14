@@ -6,11 +6,9 @@ import java.util.Set;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class SellectCountryCode extends Activity
@@ -42,7 +40,7 @@ public class SellectCountryCode extends Activity
 	if (isoCountries.contains(countryCode))
 	{
 	    Intent countryCodeResultIntent = new Intent();
-	    countryCodeResultIntent.setData(Uri.parse(countryCode));
+	    countryCodeResultIntent.putExtra("countryCode", countryCode);
 	    setResult(RESULT_OK, countryCodeResultIntent);
 	    finish();
 	} else
@@ -51,5 +49,4 @@ public class SellectCountryCode extends Activity
 	}
     }
 
-   
 }

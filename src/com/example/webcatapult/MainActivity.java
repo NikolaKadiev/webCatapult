@@ -120,19 +120,14 @@ public class MainActivity extends Activity implements AsyncResponse
 	int selectedLimit = 0;
 	if (resultCode == Activity.RESULT_OK && requestCode == 0)
 	{
-	    countryCode = data.getDataString();
+	    this.countryCode = data.getStringExtra("countryCode");
 	}
 
 	if (resultCode == Activity.RESULT_OK && requestCode == 1)
 	{
-	    try
-	    {
-		selectedLimit = Integer.parseInt(data.getDataString());
-		ratingsLimit = selectedLimit;
-	    } catch (NumberFormatException e)
-	    {
-		Log.i("WEbCatapult", "NumberFormatException");
-	    }
+	    selectedLimit = data.getIntExtra("ratingLimit", 10000000);
+	    this.ratingsLimit = selectedLimit;
+
 	}
 
     }
